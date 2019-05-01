@@ -38,13 +38,10 @@ func NewSlack(url string, text string, username string, iconEmoji string, iconUR
 
 func (s *Slack) Send() {
 	params, _ := json.Marshal(s.params)
-	log.Print(params)
 	resp, err := http.PostForm(
 		s.url,
 		url.Values{"payload": {string(params)}},
 	)
-	log.Print(resp)
-	log.Print(err)
 	defer resp.Body.Close()
 
 	if err != nil {
